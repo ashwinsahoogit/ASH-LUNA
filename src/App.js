@@ -46,14 +46,17 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Task Manager</h1>
-      <input
-        type="text"
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-        placeholder="Add a new task"
-      />
-      <button onClick={addTask}>Add Task</button>
+      <h1 className="app-title">Task Manager</h1>
+      <div className="task-input-container">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="Add a new task"
+          className="task-input"
+        />
+        <button onClick={addTask} className="add-button">Add Task</button>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="tasks">
           {(provided) => (
@@ -76,18 +79,21 @@ const App = () => {
                           type="text"
                           value={editTask}
                           onChange={(e) => setEditTask(e.target.value)}
+                          className="edit-input"
                         />
                       ) : (
                         task.content
                       )}
-                      {editIndex === index ? (
-                        <button onClick={saveEditTask}>Save</button>
-                      ) : (
-                        <>
-                          <button onClick={() => editTaskHandler(index)}>Edit</button>
-                          <button onClick={() => deleteTask(index)}>Delete</button>
-                        </>
-                      )}
+                      <div className="task-actions">
+                        {editIndex === index ? (
+                          <button onClick={saveEditTask} className="save-button">Save</button>
+                        ) : (
+                          <>
+                            <button onClick={() => editTaskHandler(index)} className="edit-button">Edit</button>
+                            <button onClick={() => deleteTask(index)} className="delete-button">Delete</button>
+                          </>
+                        )}
+                      </div>
                     </li>
                   )}
                 </Draggable>
